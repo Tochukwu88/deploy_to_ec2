@@ -14,25 +14,12 @@
 
   },
   "test": {
-    "username": "postgres",
-    "password": "password",
-    "database": "gve-app-backend-test",
-    "host": "bonitasict-db.cluster-ckect1mjzcsh.eu-west-3.rds.amazonaws.com",
+    "username": "teecee",
+    "password": "flower54%",
+    "database": "article",
     "port": 5432,
+    "host": "teeceedev.ck8zgn6lf3kl.us-east-1.rds.amazonaws.com",
     "dialect": "postgres",
-    "dialectOptions": {
-      "requestTimeout": 100000,
-      "ssl": {
-        "rejectUnauthorized": false
-      }
-    },
-    "pool": {
-      "max": 5,
-      "min": 0,
-      "idle": 20000,
-      "handleDisconnects": true
-    },
-    "language": "en",
     "define": {
       "freezeTableName": true,
       "charset": "utf8",
@@ -40,14 +27,17 @@
     }
   },
   "production": {
-    "use_env_variable": "DATABASE_URL",
+    "username": "teecee",
+    "password": "flower54%",
+    "database": "article",
+    "port": 5432,
+    "host": "teeceedev.ck8zgn6lf3kl.us-east-1.rds.amazonaws.com",
     "dialect": "postgres",
-    "dialectOptions": {
-       "ssl": {
-         "require": true,
-         "rejectUnauthorized": false
-       }
-     }
+    "define": {
+      "freezeTableName": true,
+      "charset": "utf8",
+      "collate": "utf8_general_ci"
+    }
    }
   
 }
