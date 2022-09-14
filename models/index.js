@@ -10,8 +10,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const basename = path.basename(__filename);
 const environment = process.env.NODE_ENV || "development";
-
-const jsonData = fs.readFileSync("./config/config.json"); // read json file
+console.log(path.resolve("config", "config.json"));
+const jsonData = fs.readFileSync(path.resolve("config", "config.json")); // read json file
 const config = JSON.parse(jsonData)[environment]; // extract configuration from json file
 
 console.log("loading sequelize and connecting to database...");

@@ -44,6 +44,9 @@ app.use(cookieParser());
 const __dirname = path.resolve();
 
 app.use(express.static(path.join(__dirname, "public")));
+app.get("/api/health", (req, res) => {
+  res.send("ok");
+});
 
 app.use("/api", (req, res, next) => {
   // setup CORS
