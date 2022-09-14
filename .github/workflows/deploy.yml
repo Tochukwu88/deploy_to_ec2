@@ -21,4 +21,4 @@ jobs:
 
       - run: npm install
       - run: npm migrate
-      - run: pm2 restart npm -- start
+      - run: cd bin && pm2 restart www

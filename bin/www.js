@@ -4,43 +4,48 @@
  * Module dependencies.
  */
 
-import app from '../app.js';
-import debugLib from 'debug';
-var debug = debugLib('gve-app-backend:server');
-import http from 'http';
-import https from 'https';
-import fs from 'fs';
-import path from 'path';
-import dotenv from 'dotenv';
+import app from "../app.js";
+import debugLib from "debug";
+var debug = debugLib("gve-app-backend:server");
+import http from "http";
+import https from "https";
+import fs from "fs";
+import path from "path";
+import dotenv from "dotenv";
 
 // we configure dotenv here, so that pm2 can see it and use it
 // without which pm2 will find it difficult to locate our .env due to path differences
 const __dirname = path.resolve();
-dotenv.config({ path: path.resolve(__dirname, './.env') });
+dotenv.config({ path: path.resolve(__dirname, "./.env") });
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
-app.set('port', port);
+var port = normalizePort(process.env.PORT || "3000");
+app.set("port", port);
 
 /**
  * Create HTTP server.
  */
 
- var server = process.env.SSL_CERTIFICATE_PATH ? https.createServer({
-  key: fs.readFileSync(`${process.env.SSL_CERTIFICATE_PATH}/privkey.pem`),
-  cert: fs.readFileSync(`${process.env.SSL_CERTIFICATE_PATH}/cert.pem`)
-}, app) : http.createServer(app);
+var server = process.env.SSL_CERTIFICATE_PATH
+  ? https.createServer(
+      {
+        key: fs.readFileSync(`${process.env.SSL_CERTIFICATE_PATH}/privkey.pem`),
+        cert: fs.readFileSync(`${process.env.SSL_CERTIFICATE_PATH}/cert.pem`),
+      },
+      app
+    )
+  : http.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.
  */
 
 server.listen(port);
-server.on('error', onError);
-server.on('listening', onListening);
+server.on("error", onError);
+server.on("listening", onListening);
 
 /**
  * Normalize a port into a number, string, or false.
@@ -67,22 +72,20 @@ function normalizePort(val) {
  */
 
 function onError(error) {
-  if (error.syscall !== 'listen') {
+  if (error.syscall !== "listen") {
     throw error;
   }
 
-  var bind = typeof port === 'string'
-    ? 'Pipe ' + port
-    : 'Port ' + port;
+  var bind = typeof port === "string" ? "Pipe " + port : "Port " + port;
 
   // handle specific listen errors with friendly messages
   switch (error.code) {
-    case 'EACCES':
-      console.error(bind + ' requires elevated privileges');
+    case "EACCES":
+      console.error(bind + " requires elevated privileges");
       process.exit(1);
       break;
-    case 'EADDRINUSE':
-      console.error(bind + ' is already in use');
+    case "EADDRINUSE":
+      console.error(bind + " is already in use");
       process.exit(1);
       break;
     default:
@@ -96,8 +99,6 @@ function onError(error) {
 
 function onListening() {
   var addr = server.address();
-  var bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + addr.port;
-  debug('Listening on ' + bind);
+  var bind = typeof addr === "string" ? "pipe " + addr : "port " + addr.port;
+  debug("Listening on " + bind);
 }
